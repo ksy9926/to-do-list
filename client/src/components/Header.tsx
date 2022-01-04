@@ -1,75 +1,36 @@
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
-import COLOR_PALETTE from 'styles/colors';
-import SearchIcon from 'icons/codicon_search.svg';
-
-const HeaderWrap = styled.header`
-  display: flex; 
-  justify-content: space-between;
-  align-items: center;
-
-  height: 50px;
-  background: ${COLOR_PALETTE.PINK500};
-`
-
-const InputDiv = styled.div`
-  position: relative;
-`
-
-const SearchImage = styled.img`
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  width: 20px;
-  height: 20px;
-
-  cursor: pointer;
-`
-
-const Input = styled.input`
-  height: 30px;
-  width: 300px;
-  padding-left: 50px;
-  border: none;
-  border-radius: 3px;
-  background: ${COLOR_PALETTE.PINK200};
-
-  &:hover {
-    background: #fff;
-  }
-  &:focus {
-    outline: none;
-  }
-`
-const LogoDiv = styled.div`
-  font-weight: bold;
-  color: #fff;
-  margin: 10px;
-`
-const ProfileDiv = styled.div`
-  font-weight: bold;
-  color: #fff;
-  margin: 10px;
-`
+import { useRef, useCallback } from 'react';
+import { ReactComponent as SearchIcon } from 'assets/icons/search.svg';
+import { ReactComponent as TripbtozIcon } from 'assets/icons/logo.svg';
+import { ReactComponent as ProfileIcon } from 'assets/icons/profile.svg';
+import {
+  HeaderWrap,
+  LogoDiv,
+  InputDiv,
+  searchIconStyle,
+  Input,
+  ProfileDiv,
+} from 'styles/headerStyle';
 
 const Header = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onFocusHandler = () => {
-    if (!inputRef.current) return;
-    inputRef.current.focus()
-  }
+  const onFocusHandler = useCallback((): void => {
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
 
   return (
     <HeaderWrap>
-      <LogoDiv>To Do</LogoDiv>
+      <LogoDiv>
+        <TripbtozIcon style={{ marginRight: '10px' }} />
+        To Do
+      </LogoDiv>
       <InputDiv>
-        <SearchImage src={SearchIcon} onClick={onFocusHandler} />
-        <Input placeholder='검색' ref={inputRef} />
+        <SearchIcon style={searchIconStyle} onClick={onFocusHandler} />
+        <Input placeholder="검색" ref={inputRef} />
       </InputDiv>
-      <ProfileDiv>프로필</ProfileDiv>
+      <ProfileDiv>
+        <ProfileIcon />
+      </ProfileDiv>
     </HeaderWrap>
   );
 };
