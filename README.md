@@ -46,3 +46,8 @@ tripbtoz-todo-project
 1. 저장소 복제
 2. 프로젝트 폴더로 이동후 node_modules 설치
 3. 리액트 실행
+
+### 참고
+
+- [Microsoft To Do UI](https://to-do.live.com/tasks/today)
+- [몽고db연결](https://poiemaweb.com/mongoose)

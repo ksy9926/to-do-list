@@ -22,6 +22,11 @@ export const NavItemDiv = styled.div`
   align-items: center;
   height: 40px;
   padding: 0 15px;
+  cursor: pointer;
+
+  &:hover {
+    background: ${COLOR_PALETTE.BG_OFF_WHITE}
+  }
 `;
 
 export const NavTitleSpan = styled.span`

@@ -9,3 +9,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+svg {
+  cursor: pointer;
+}
