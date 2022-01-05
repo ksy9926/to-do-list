@@ -24,15 +24,23 @@ const Title = styled.h2`
 
 const Today = styled.div``;
 
-const AddDiv = styled.div`
+const AddDiv = styled.div<{ flag: boolean }>`
   display: flex;
+  flex-direction: ${(props) => (props.flag ? 'column' : 'row')};
   align-items: center;
 
+  box-sizing: border-box;
   border-radius: 5px;
   padding: 15px;
   margin: 0 10px;
 
   background: ${COLOR_PALETTE.GRAY50};
+`;
+
+const AddInput = styled.input`
+  width: 100%;
+
+  border-bottom: 2px solid red;
 `;
 
 const TextDiv = styled.div`
@@ -62,6 +70,7 @@ const TodoInfo = styled.div`
 
 const Todo = () => {
   const [todos, setTodos] = useState<string[]>([]);
+  const [isAdd, setIsAdd] = useState<boolean>(false);
   const date = new Date();
 
   useEffect(() => {
@@ -77,6 +86,16 @@ const Todo = () => {
     }
   }, []);
 
+  const postData = async () => {
+    const res = await axios.post('http://localhost:8080/todos', {
+      todoid: 1,
+      content: '타입스크립트 공부',
+      completed: false,
+    });
+  };
+
+  const addTodoHandler = () => {};
+
   const todoList = todos.map((item: string, i: number) => {
     return (
       <TodoDiv key={i}>
@@ -90,14 +109,6 @@ const Todo = () => {
     );
   });
 
-  const postData = async () => {
-    const res = await axios.post('http://localhost:8080/todos', {
-      todoid: 1,
-      content: '타입스크립트 공부',
-      completed: false,
-    });
-  };
-
   return (
     <Main>
       <TitleWrap>
@@ -107,12 +118,27 @@ const Todo = () => {
           {DAY_INFO[date.getDay()]}요일
         </Today>
       </TitleWrap>
-      <AddDiv>
-        <PlusIcon />
-        <TextDiv>작업 추가</TextDiv>
-      </AddDiv>
+      {isAdd ? (
+        <AddDiv flag={isAdd}>
+          <AddInput placeholder="작업 추가" />
+          <div style={{ display: 'flex' }}>
+            <button
+              onClick={() => {
+                setIsAdd(!isAdd);
+              }}
+            >
+              취소
+            </button>
+            <div>완료</div>
+          </div>
+        </AddDiv>
+      ) : (
+        <AddDiv flag={isAdd} onClick={() => setIsAdd(true)}>
+          <PlusIcon />
+          <TextDiv>작업 추가</TextDiv>
+        </AddDiv>
+      )}
       <div>{todoList}</div>
-      <button onClick={postData}>투두 추가</button>
     </Main>
   );
 };

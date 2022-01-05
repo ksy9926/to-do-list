@@ -18,3 +18,11 @@ ul {
 svg {
   cursor: pointer;
 }
+
+input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}

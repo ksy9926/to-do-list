@@ -43,7 +43,7 @@ export const InputDiv = styled.div`
 export const Input = styled.input`
   height: 30px;
   width: 300px;
-  padding-left: 50px;
+  padding: 0 30px 0 50px;
   border: none;
   border-radius: 3px;
   background: ${COLOR_PALETTE.PINK200};
