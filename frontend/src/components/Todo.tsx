@@ -18,16 +18,19 @@ import {
   TextDiv,
 } from 'styles/todoStylel';
 
+import { TodosType } from 'types/types';
+
 const Todo = () => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<TodosType[]>([]);
   const [todoValue, setTodoValue] = useState('');
   const date = new Date();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('http://localhost:8080');
-      setTodos(res.data.todo);
+      const res = await axios.get('http://localhost:8080/todos');
+      console.log(res.data.todos);
+      setTodos(res.data.todos);
     };
 
     try {
@@ -39,21 +42,26 @@ const Todo = () => {
 
   const postData = async () => {
     const res = await axios.post('http://localhost:8080/todos', {
-      todoid: 2,
+      todoid: 3,
       content: todoValue,
       completed: false,
     });
     console.log('res: ', res);
   };
 
+  const getTodoById = async () => {
+    const res = await axios.get('http://localhost:8080/todos/todoid/1');
+    console.log('todoid 1: ', res);
+  };
+
   const addTodoHandler = () => {};
 
-  const todoList = todos.map((item: string, i: number) => {
+  const todoList = todos.map((item: TodosType, i: number) => {
     return (
       <TodoDiv key={i}>
         <EmptyCircleIcon />
         <TodoInfo>
-          <div style={{ padding: '2px 0' }}>{item}</div>
+          <div style={{ padding: '2px 0' }}>{item.content}</div>
           <div style={{ padding: '2px 0' }}>작업</div>
         </TodoInfo>
         <EmptyStarIcon />

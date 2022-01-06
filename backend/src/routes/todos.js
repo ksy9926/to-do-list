@@ -8,13 +8,14 @@ router.get('/', (req, res) => {
   Todo.findAll()
     .then((todos) => {
       if (!todos.length) return res.status(404).send({ err: 'Todo not found' });
-      res.send(`find successfully: ${todos}`);
+      res.send({ todos: todos });
     })
     .catch((err) => res.status(500).send(err));
 });
 
 // Find One by todoid
 router.get('/todoid/:todoid', (req, res) => {
+  console.log('req.params: ', req.params);
   Todo.findOneByTodoid(req.params.todoid)
     .then((todo) => {
       if (!todo) return res.status(404).send({ err: 'Todo not found' });

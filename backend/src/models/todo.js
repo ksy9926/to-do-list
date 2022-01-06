@@ -18,8 +18,6 @@ const todoSchema = new Schema(
 // collection의 이름을 명시적으로 지정하고자 할 때는 schema 생성시 option을 지정한다.
 // const todoSchema = new mongoose.Schema({...}, { collection: 'my-collection-name' })
 
-const Todo = mongoose.model('Todo', todoSchema);
-
 // Create new todo document
 todoSchema.statics.create = function (payload) {
   // this === Model
@@ -51,4 +49,4 @@ todoSchema.statics.deleteByTodoid = function (todoid) {
   return this.remove({ todoid });
 };
 
-export { Todo };
+export const Todo = mongoose.model('Todo', todoSchema);

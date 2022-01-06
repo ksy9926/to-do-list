@@ -31,9 +31,19 @@
 
 ```
 tripbtoz-todo-project
-ㄴ client
+ㄴ frontend
   ㄴ src
-ㄴ server
+    ㄴ assets
+    ㄴ components
+    ㄴ constants
+    ㄴ pages
+    ㄴ redux
+    ㄴ styles
+    ㄴ types
+ㄴ backend
+  ㄴ src
+    ㄴ models
+    ㄴ routes
 ㄴ README.md
 ```
 
