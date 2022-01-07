@@ -5,6 +5,7 @@ import { ReactComponent as CheckCircleIcon } from 'assets/icons/check_circle.svg
 import { ReactComponent as EmptyCircleIcon } from 'assets/icons/empty_circle.svg';
 import { ReactComponent as EmptyStarIcon } from 'assets/icons/empty_star.svg';
 import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
+import { ReactComponent as CalendarIcon } from 'assets/icons/calendar.svg';
 import { DAY_INFO } from 'constants/date';
 import {
   Main,
@@ -18,11 +19,11 @@ import {
   TextDiv,
 } from 'styles/todoStylel';
 
-import { TodosType } from 'types/types';
+import { TodoType } from 'types/types';
 
 const Todo = () => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
-  const [todos, setTodos] = useState<TodosType[]>([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
   const [todoValue, setTodoValue] = useState('');
   const date = new Date();
 
@@ -41,12 +42,22 @@ const Todo = () => {
   }, []);
 
   const postData = async () => {
-    const res = await axios.post('http://localhost:8080/todos', {
-      todoid: 3,
-      content: todoValue,
-      completed: false,
-    });
-    console.log('res: ', res);
+    try {
+      const res = await axios.post('http://localhost:8080/todos', {
+        content: todoValue,
+        completed: false,
+      });
+
+      setTodos([...todos, res.data]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onDeleteData = async () => {
+    for (let i = 1; i <= 5; i++) {
+      const res = await axios.delete(`http://localhost:8080/todos/todoid/${i}`);
+    }
   };
 
   const getTodoById = async () => {
@@ -56,13 +67,30 @@ const Todo = () => {
 
   const addTodoHandler = () => {};
 
-  const todoList = todos.map((item: TodosType, i: number) => {
+  const onCompleteHandler = async (item: TodoType, i: number) => {
+    const res = await axios.put(`http://localhost:8080/todos/todoid/${item.todoid}`, {
+      completed: !item.completed,
+    });
+
+    const newTodos = [...todos];
+    newTodos[i].completed = !newTodos[i].completed;
+    setTodos(newTodos);
+  };
+
+  const todoList = todos.map((item: TodoType, i: number) => {
     return (
       <TodoDiv key={i}>
-        <EmptyCircleIcon />
+        {item.completed ? (
+          <CheckCircleIcon onClick={() => onCompleteHandler(item, i)} />
+        ) : (
+          <EmptyCircleIcon onClick={() => onCompleteHandler(item, i)} />
+        )}
         <TodoInfo>
           <div style={{ padding: '2px 0' }}>{item.content}</div>
-          <div style={{ padding: '2px 0' }}>작업</div>
+          <div style={{ padding: '2px 0' }}>
+            <span>작업</span>
+            <span style={{ marginLeft: '15px' }}>{item.createdAt.slice(0, 10)}</span>
+          </div>
         </TodoInfo>
         <EmptyStarIcon />
       </TodoDiv>
@@ -85,15 +113,29 @@ const Todo = () => {
             value={todoValue}
             onChange={(e) => setTodoValue(e.target.value)}
           />
-          <div style={{ display: 'flex' }}>
-            <button
-              onClick={() => {
-                setIsAdd(!isAdd);
-              }}
-            >
-              취소
-            </button>
-            <button onClick={postData}>완료</button>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+              marginTop: '10px',
+              fontSize: '0.8rem',
+            }}
+          >
+            <CalendarIcon />
+            <div>
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  setIsAdd(!isAdd);
+                }}
+              >
+                취소
+              </span>
+              <span style={{ cursor: 'pointer', marginLeft: '15px' }} onClick={postData}>
+                완료
+              </span>
+            </div>
           </div>
         </AddDiv>
       ) : (
@@ -103,6 +145,7 @@ const Todo = () => {
         </AddDiv>
       )}
       <div>{todoList}</div>
+      {/* <button onClick={onDeleteData}>삭제</button> */}
     </Main>
   );
 };

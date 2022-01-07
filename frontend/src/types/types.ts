@@ -2,8 +2,8 @@ export interface DayType {
   [key: number]: string,
 }
 
-export interface TodosType {
-  completed: string;
+export interface TodoType {
+  completed: boolean;
   content: string;
   createdAt: string;
   todoid: number;
