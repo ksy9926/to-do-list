@@ -8,7 +8,7 @@ import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 
 const Aside = styled.aside`
-  width: 300px;
+  min-width: 300px;
   background: ${COLOR_PALETTE.GRAY50};
 `;
 

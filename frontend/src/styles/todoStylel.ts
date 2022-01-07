@@ -3,6 +3,7 @@ import COLOR_PALETTE from 'styles/colors';
 
 export const Main = styled.main`
   flex: auto;
+  min-width: 0;
 `;
 
 export const TitleWrap = styled.div`
@@ -60,4 +61,6 @@ export const TodoInfo = styled.div`
   box-sizing: border-box;
   height: 100%;
   margin-left: 15px;
+
+  overflow: hidden;
 `;

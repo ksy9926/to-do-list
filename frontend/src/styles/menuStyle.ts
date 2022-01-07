@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import COLOR_PALETTE from 'styles/colors';
 
 export const MenuWrap = styled.div`
-  width: 300px;
+  min-width: 300px;
 
   background: ${COLOR_PALETTE.GRAY50};
 `;

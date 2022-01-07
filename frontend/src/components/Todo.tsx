@@ -86,7 +86,16 @@ const Todo = () => {
           <EmptyCircleIcon onClick={() => onCompleteHandler(item, i)} />
         )}
         <TodoInfo>
-          <div style={{ padding: '2px 0' }}>{item.content}</div>
+          <div
+            style={{
+              padding: '2px 0',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {item.content}
+          </div>
           <div style={{ padding: '2px 0' }}>
             <span>작업</span>
             <span style={{ marginLeft: '15px' }}>{item.createdAt.slice(0, 10)}</span>
