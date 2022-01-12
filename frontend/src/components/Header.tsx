@@ -50,7 +50,11 @@ const Header = () => {
         )}
       </InputDiv>
       <ProfileDiv>
-        <ProfileIcon />
+        <ProfileIcon
+          onClick={() => {
+            alert('준비중입니다!');
+          }}
+        />
       </ProfileDiv>
     </HeaderWrap>
   );

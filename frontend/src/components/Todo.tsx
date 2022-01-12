@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import axios from 'axios';
 import { ReactComponent as CheckCircleIcon } from 'assets/icons/check_circle.svg';
@@ -18,27 +20,20 @@ import {
   AddInput,
   TextDiv,
 } from 'styles/todoStylel';
-
+import { fetchTodosInfo } from 'apis/api';
 import { TodoType } from 'types/types';
+import { getTodosAsync } from 'redux/actions/todosAction';
 
 const Todo = () => {
+  const dispatch = useDispatch();
   const [isAdd, setIsAdd] = useState<boolean>(false);
-  const [todos, setTodos] = useState<TodoType[]>([]);
+  // const [todos, setTodos] = useState<TodoType[]>([]);
   const [todoValue, setTodoValue] = useState('');
   const date = new Date();
+  const { data: todos, error } = useSelector((state: RootState) => state.todo.todos);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get('http://localhost:8080/todos');
-      console.log(res.data.todos);
-      setTodos(res.data.todos);
-    };
-
-    try {
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch(getTodosAsync.request());
   }, []);
 
   const postData = async () => {
@@ -48,7 +43,7 @@ const Todo = () => {
         completed: false,
       });
 
-      setTodos([...todos, res.data]);
+      // setTodos([...todos, res.data]);
     } catch (e) {
       console.log(e);
     }
@@ -74,7 +69,7 @@ const Todo = () => {
 
     const newTodos = [...todos];
     newTodos[i].completed = !newTodos[i].completed;
-    setTodos(newTodos);
+    // setTodos(newTodos);
   };
 
   const todoList = todos.map((item: TodoType, i: number) => {
@@ -154,7 +149,10 @@ const Todo = () => {
         </AddDiv>
       )}
       <div>{todoList}</div>
-      {/* <button onClick={onDeleteData}>삭제</button> */}
+      <TitleWrap>
+        {' '}
+        <Title>완료됨</Title>
+      </TitleWrap>
     </Main>
   );
 };
