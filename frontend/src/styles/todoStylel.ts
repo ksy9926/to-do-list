@@ -23,6 +23,7 @@ export const AddDiv = styled.div<{ flag: boolean }>`
   align-items: center;
 
   box-sizing: border-box;
+  border: 1px solid ${COLOR_PALETTE.GRAY100};
   border-radius: 5px;
   padding: 15px;
   margin: 0 10px;
@@ -43,12 +44,23 @@ export const TextDiv = styled.div`
   line-height: 30px;
 `;
 
-export const TodoDiv = styled.div`
+interface SelectedType {
+  selected: Boolean
+}
+
+export const TodoDiv = styled.div<SelectedType>`
   display: flex;
   align-items: center;
   height: 70px;
   border-bottom: 1px solid ${COLOR_PALETTE.GRAY500};
+  padding: 0 10px;
   margin: 0 15px;
+  background: ${(props) => props.selected ? COLOR_PALETTE.PINK100 : ''};
+
+  &:hover {
+    background: ${(props) => props.selected ? COLOR_PALETTE.PINK100 : COLOR_PALETTE.BG_OFF_WHITE};
+    cursor: pointer;
+  }
 `;
 
 export const TodoInfo = styled.div`

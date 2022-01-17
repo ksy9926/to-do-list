@@ -8,7 +8,9 @@ const todoSchema = new Schema(
   {
     todoid: { type: Number, unique: true },
     content: { type: String, required: true },
+    description: { type: String, default: '' },
     completed: { type: Boolean, default: false },
+    completedAt: { type: String, default: '' },
   },
   {
     timestamps: true,

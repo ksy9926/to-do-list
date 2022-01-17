@@ -3,7 +3,7 @@ import COLOR_PALETTE from 'styles/colors';
 
 export const MenuWrap = styled.div`
   min-width: 300px;
-
+  border-right: 1px solid ${COLOR_PALETTE.GRAY100};
   background: ${COLOR_PALETTE.GRAY50};
 `;
 

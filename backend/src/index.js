@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import todosRouter from './routes/todos.js';
+import { specs } from './modules/swagger.js';
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 const server = createServer(app);
@@ -14,6 +16,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 mongoose.Promise = global.Promise;
 

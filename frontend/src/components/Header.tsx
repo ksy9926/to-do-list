@@ -11,9 +11,14 @@ import {
   Input,
   ProfileDiv,
 } from 'styles/headerStyle';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { setSearchValue } from 'redux/actions/searchAction';
+import { debounce } from 'utils/debounce';
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const dispatch = useDispatch();
+  const { value } = useSelector((state: RootState) => state.search);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,13 +36,12 @@ const Header = () => {
         <SearchIcon style={searchIconStyle} onClick={onFocusHandler} />
         <Input
           placeholder={isFocused ? '검색' : ''}
-          value={searchValue}
           ref={inputRef}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => debounce(() => dispatch(setSearchValue(e.target.value)), 300)}
         />
-        {(isFocused || searchValue) && (
+        {(isFocused || value) && (
           <ClearIcon
             style={{
               position: 'absolute',
@@ -45,7 +49,10 @@ const Header = () => {
               right: '5px',
               transform: 'translateY(-50%)',
             }}
-            onClick={() => setSearchValue('')}
+            onClick={() => {
+              dispatch(setSearchValue(''));
+              if (inputRef.current) inputRef.current.value = '';
+            }}
           />
         )}
       </InputDiv>

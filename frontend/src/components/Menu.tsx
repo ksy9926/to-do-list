@@ -10,12 +10,24 @@ import {
   NavTitleSpan,
   NavCountSpan,
 } from 'styles/menuStyle';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { toggleMenu } from 'redux/actions/menuAction';
 
 const Menu = () => {
+  const dispatch = useDispatch();
+  const { open } = useSelector((state: RootState) => state.menu);
+
+  if (!open) return <></>;
+
   return (
     <MenuWrap>
       <HamburgerDiv>
-        <HamburgerIcon />
+        <HamburgerIcon
+          onClick={() => {
+            dispatch(toggleMenu());
+          }}
+        />
       </HamburgerDiv>
       <Nav>
         <NavItemDiv>

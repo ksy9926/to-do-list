@@ -11,17 +11,33 @@ export interface TodoType {
   createdAt: string;
   todoid: number;
   updatedAt: string;
+  completedAt: string;
+  description: string;
   __v: number;
   _id: string;
 }
 
 export type TodosType = TodoType[]
 
+export interface ResTodosType {
+  todos: TodosType
+}
+
 export interface TodosState {
   todos: {
-    data: TodoType[],
+    data: TodosType,
     error: Error | null;
   }
 }
 
 export type TodosAction = ActionType<typeof actions>;
+
+export interface TodosData {
+  todos: TodosType
+}
+
+export interface PutTodoType {
+  todoid: number,
+  todo: TodoType,
+  index: number
+}

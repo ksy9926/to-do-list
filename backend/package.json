@@ -12,6 +12,8 @@
     "http": "^0.0.1-security",
     "mongoose": "^6.1.5",
     "mongoose-auto-increment": "^5.0.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
   }
 }
