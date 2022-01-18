@@ -76,3 +76,10 @@ export const TodoInfo = styled.div`
 
   overflow: hidden;
 `;
+
+export const TodoContent = styled.div`
+  padding: '2px 0';
+  white-space: 'nowrap';
+  overflow: 'hidden';
+  text-overflow: 'ellipsis';
+`

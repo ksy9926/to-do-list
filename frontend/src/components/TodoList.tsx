@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { TodoType } from 'types/types';
-import { TodoDiv, TodoInfo } from 'styles/todoStylel';
+import { TodoDiv, TodoInfo, TodoContent } from 'styles/todoStyle';
 import { ReactComponent as CheckCircleIcon } from 'assets/icons/check_circle.svg';
 import { ReactComponent as EmptyCircleIcon } from 'assets/icons/empty_circle.svg';
 import { ReactComponent as EmptyStarIcon } from 'assets/icons/empty_star.svg';
 import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
-import { deleteTodosAsync, putTodosAsync } from 'redux/actions/todosAction';
+import { putTodosAsync } from 'redux/actions/todosAction';
 import { setSelected } from 'redux/actions/selectedAction';
 import { getFormatDate } from 'utils/date';
 
@@ -16,15 +16,12 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
   const { id: selectedId } = useSelector((state: RootState) => state.selected);
   const dispatch = useDispatch();
 
-  console.log('todos: ', todos);
-
   if (error) console.log(error);
 
   const putData = (todoid: number, index: number) => {
     const todo = { ...todos[index] };
 
     todo.completedAt = todo.completed ? '' : getFormatDate();
-    console.log('completedAt: ', todo.completedAt);
     todo.completed = !todo.completed;
 
     dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
@@ -40,19 +37,10 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
             <EmptyCircleIcon onClick={() => putData(item.todoid, i)} />
           )}
           <TodoInfo>
-            <div
-              style={{
-                padding: '2px 0',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {item.content}
-            </div>
+            <TodoContent style={{}}>{item.content}</TodoContent>
             <div style={{ padding: '2px 0' }}>
-              <span>작업</span>
-              <span style={{ marginLeft: '15px' }}>{item.createdAt.slice(0, 10)}</span>
+              <span>{completed ? '완료' : '진행중'}</span>
+              <span style={{ marginLeft: '10px' }}>{item.createdAt.slice(0, 10)}</span>
             </div>
           </TodoInfo>
           <EmptyStarIcon />
@@ -61,5 +49,5 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
     }
   });
 
-  return <div>{todoList}</div>;
+  return <>{todoList}</>;
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import COLOR_PALETTE from 'styles/colors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { deleteTodosAsync, putTodosAsync } from 'redux/actions/todosAction';
 import { setSelected } from 'redux/actions/selectedAction';
+import { message } from 'antd';
 
 const Aside = styled.aside`
   min-width: 300px;
@@ -75,14 +76,14 @@ const Detail = () => {
     todo.description = detailValue;
 
     dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
+    message.success('세부 내용이 수정되었습니다.');
   };
 
   const deleteData = (todoid: number) => {
     dispatch(setSelected(undefined));
     dispatch(deleteTodosAsync.request(todoid));
+    message.success('할 일이 삭제되었습니다.');
   };
-
-  console.log('id: ', id);
 
   return (
     <>
@@ -99,17 +100,15 @@ const Detail = () => {
           </DetailDiv>
           <DetailDiv>생성날짜: {todos[id].createdAt.slice(0, 10)}</DetailDiv>
           <DetailDiv>완료날짜: {todos[id].completedAt.slice(0, 10)}</DetailDiv>
-          {/* {todos[id].description ? (
-            <DetailDiv>{todos[id].description}</DetailDiv>
-          ) : ( */}
           <DetailDiv style={{ padding: 0, height: '150px', alignItems: 'start' }}>
             <DetailTextArea
               value={detailValue}
               onChange={(e) => setDetailValue(e.target.value)}
-              onBlur={() => putData(todos[id].todoid, id)}
-            ></DetailTextArea>
+              onBlur={() => {
+                putData(todos[id].todoid, id);
+              }}
+            />
           </DetailDiv>
-          {/* )} */}
           <DetailDiv
             style={{ cursor: 'pointer' }}
             onClick={() => {

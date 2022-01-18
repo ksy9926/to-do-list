@@ -6,11 +6,12 @@ import axios from 'axios';
 import { ReactComponent as CalendarIcon } from 'assets/icons/calendar.svg';
 import { ReactComponent as HamburgerIcon } from 'assets/icons/hamburger.svg';
 import { DAY_INFO } from 'constants/date';
-import { Main, TitleWrap, Title, Today, AddDiv, AddInput, TextDiv } from 'styles/todoStylel';
+import { Main, TitleWrap, Title, Today, AddDiv, AddInput, TextDiv } from 'styles/todoStyle';
 import { TodoType } from 'types/types';
 import { getTodosAsync, postTodosAsync } from 'redux/actions/todosAction';
 import { TodoList } from './TodoList';
 import { toggleMenu } from 'redux/actions/menuAction';
+import { message } from 'antd';
 
 const Todo = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,13 @@ const Todo = () => {
   }, []);
 
   const postData = () => {
-    dispatch(postTodosAsync.request(todoValue));
+    if (todoValue.trim() !== '') {
+      dispatch(postTodosAsync.request(todoValue));
+      message.success('할 일이 등록되었습니다.');
+      setIsAdd(false);
+    } else {
+      message.error('할 일을 입력해주세요.');
+    }
   };
 
   const getTodoById = async () => {
@@ -94,7 +101,6 @@ const Todo = () => {
                 style={{ cursor: 'pointer', marginLeft: '15px' }}
                 onClick={() => {
                   postData();
-                  setIsAdd(false);
                   setTodoValue('');
                 }}
               >
