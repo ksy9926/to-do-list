@@ -30,10 +30,6 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
     dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
   };
 
-  const deleteData = (todoid: number) => {
-    dispatch(deleteTodosAsync.request(todoid));
-  };
-
   const todoList = todos.map((item: TodoType, i: number) => {
     if (item.completed === completed && item.content.includes(value)) {
       return (

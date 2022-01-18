@@ -9,6 +9,7 @@ import { ReactComponent as EmptyStarIcon } from 'assets/icons/empty_star.svg';
 import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { deleteTodosAsync, putTodosAsync } from 'redux/actions/todosAction';
+import { setSelected } from 'redux/actions/selectedAction';
 
 const Aside = styled.aside`
   min-width: 300px;
@@ -77,8 +78,11 @@ const Detail = () => {
   };
 
   const deleteData = (todoid: number) => {
+    dispatch(setSelected(undefined));
     dispatch(deleteTodosAsync.request(todoid));
   };
+
+  console.log('id: ', id);
 
   return (
     <>
