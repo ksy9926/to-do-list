@@ -1,1 +1,1 @@
-{"todos":[{"todoid":34,"content":"타입스크립트 공부"},{"todoid":35,"content":"타운홀 참석"}]}
+{"todos":[{"todoid":1,"content":"새로운 투두리스트","completed":false,"completedAt":"","description":"","createdAt":"2022-01-19 15:27","important":false},{"todoid":2,"content":"또다른 투두","completed":false,"completedAt":"","description":"sdfsdf","createdAt":"2022-01-19 15:29","important":false},{"todoid":3,"content":"추가","completed":true,"completedAt":"2022-01-19 16:17","description":"","createdAt":"2022-01-19 16:13","important":false}]}

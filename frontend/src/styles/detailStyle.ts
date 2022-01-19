@@ -7,6 +7,15 @@ export const Aside = styled.aside`
   background: ${COLOR_PALETTE.GRAY50};
 `;
 
+export const DetailTitleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  padding: 15px;
+  border: 1px solid ${COLOR_PALETTE.GRAY100};
+  background: #fff;
+`;
+
 export const DetailDiv = styled.div`
   display: flex;
   align-items: center;
@@ -19,6 +28,12 @@ export const DetailDiv = styled.div`
     background: ${COLOR_PALETTE.BG_OFF_WHITE};
   }
 `;
+
+export const DetailTitleInput = styled.input`
+  &:hover {
+    background: ${COLOR_PALETTE.BG_OFF_WHITE}
+  }
+`
 
 export const DetailTextArea = styled.textarea`
   display: flex;
