@@ -10,7 +10,7 @@ import { putTodosAsync } from 'redux/actions/todosAction';
 import { setSelected } from 'redux/actions/selectedAction';
 import { getFormatDate } from 'utils/date';
 
-export const TodoList = ({ completed }: { completed: Boolean }) => {
+export const TodoList = ({ completed, menu }: { completed: Boolean; menu: string }) => {
   const { data: todos, error } = useSelector((state: RootState) => state.todo.todos);
   const { value } = useSelector((state: RootState) => state.search);
   const { id: selectedId } = useSelector((state: RootState) => state.selected);
@@ -18,7 +18,7 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
 
   if (error) console.log(error);
 
-  const putData = (todoid: number, index: number) => {
+  const putCompletedData = (todoid: number, index: number) => {
     const todo = { ...todos[index] };
 
     todo.completedAt = todo.completed ? '' : getFormatDate();
@@ -27,23 +27,36 @@ export const TodoList = ({ completed }: { completed: Boolean }) => {
     dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
   };
 
+  const putImportantData = (todoid: number, index: number) => {
+    const todo = { ...todos[index] };
+
+    todo.important = !todo.important;
+
+    dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
+  };
+
   const todoList = todos.map((item: TodoType, i: number) => {
-    if (item.completed === completed && item.content.includes(value)) {
+    if (menu === 'important' && !item.important) return;
+    if (item.completed === completed && item.content.toLowerCase().includes(value)) {
       return (
         <TodoDiv selected={selectedId === i} key={i} onClick={() => dispatch(setSelected(i))}>
           {item.completed ? (
-            <CheckCircleIcon onClick={() => putData(item.todoid, i)} />
+            <CheckCircleIcon onClick={() => putCompletedData(item.todoid, i)} />
           ) : (
-            <EmptyCircleIcon onClick={() => putData(item.todoid, i)} />
+            <EmptyCircleIcon onClick={() => putCompletedData(item.todoid, i)} />
           )}
           <TodoInfo>
-            <TodoContent style={{}}>{item.content}</TodoContent>
+            <TodoContent>{item.content}</TodoContent>
             <div style={{ padding: '2px 0' }}>
               <span>{completed ? '완료' : '진행중'}</span>
               <span style={{ marginLeft: '10px' }}>{item.createdAt.slice(0, 10)}</span>
             </div>
           </TodoInfo>
-          <EmptyStarIcon />
+          {item.important ? (
+            <FullStarIcon onClick={() => putImportantData(item.todoid, i)} />
+          ) : (
+            <EmptyStarIcon onClick={() => putImportantData(item.todoid, i)} />
+          )}
         </TodoDiv>
       );
     }

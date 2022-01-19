@@ -17,12 +17,13 @@ export const HamburgerDiv = styled.div`
 
 export const Nav = styled.nav``;
 
-export const NavItemDiv = styled.div`
+export const NavItemDiv = styled.div<{ menu: boolean }>`
   display: flex;
   align-items: center;
   height: 40px;
   padding: 0 15px;
   cursor: pointer;
+  background: ${props => props.menu && COLOR_PALETTE.BG_OFF_WHITE};
 
   &:hover {
     background: ${COLOR_PALETTE.BG_OFF_WHITE}

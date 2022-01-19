@@ -13,6 +13,7 @@ export interface TodoType {
   updatedAt: string;
   completedAt: string;
   description: string;
+  important: boolean;
   __v: number;
   _id: string;
 }

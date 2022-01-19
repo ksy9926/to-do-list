@@ -1,7 +1,6 @@
 import { ReactComponent as HamburgerIcon } from 'assets/icons/hamburger.svg';
 import { ReactComponent as LightIcon } from 'assets/icons/light.svg';
 import { ReactComponent as EmptyStarIcon } from 'assets/icons/empty_star.svg';
-import { ReactComponent as CalendarIcon } from 'assets/icons/calendar.svg';
 import {
   MenuWrap,
   HamburgerDiv,
@@ -13,10 +12,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { toggleMenu } from 'redux/actions/menuAction';
+import { useNavigate } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({ menu }: { menu: string }) => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const { open } = useSelector((state: RootState) => state.menu);
+  const { data: todos, error } = useSelector((state: RootState) => state.todo.todos);
 
   if (!open) return <></>;
 
@@ -30,20 +32,17 @@ const Menu = () => {
         />
       </HamburgerDiv>
       <Nav>
-        <NavItemDiv>
+        <NavItemDiv menu={menu === 'today'} onClick={() => navigate('/')}>
           <LightIcon />
           <NavTitleSpan>오늘 할 일</NavTitleSpan>
-          <NavCountSpan>2</NavCountSpan>
+          <NavCountSpan>{todos.filter((item) => !item.completed).length}</NavCountSpan>
         </NavItemDiv>
-        <NavItemDiv>
+        <NavItemDiv menu={menu === 'important'} onClick={() => navigate('/important')}>
           <EmptyStarIcon />
           <NavTitleSpan>중요</NavTitleSpan>
-          <NavCountSpan>2</NavCountSpan>
-        </NavItemDiv>
-        <NavItemDiv>
-          <CalendarIcon />
-          <NavTitleSpan>계획된 일정</NavTitleSpan>
-          <NavCountSpan>2</NavCountSpan>
+          <NavCountSpan>
+            {todos.filter((item) => item.important && !item.completed).length}
+          </NavCountSpan>
         </NavItemDiv>
       </Nav>
     </MenuWrap>

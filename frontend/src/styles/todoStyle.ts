@@ -83,3 +83,10 @@ export const TodoContent = styled.div`
   overflow: 'hidden';
   text-overflow: 'ellipsis';
 `
+
+export const AddText = styled.div`
+  text-align: right;
+  width: '100%';
+  margin-top: '10px';
+  font-size: '0.8rem';
+`               

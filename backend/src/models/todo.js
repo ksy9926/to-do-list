@@ -11,6 +11,7 @@ const todoSchema = new Schema(
     description: { type: String, default: '' },
     completed: { type: Boolean, default: false },
     completedAt: { type: String, default: '' },
+    important: { type: Boolean, default: false },
   },
   {
     timestamps: true,

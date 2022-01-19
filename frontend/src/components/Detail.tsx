@@ -1,64 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import COLOR_PALETTE from 'styles/colors';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { ReactComponent as CheckCircleIcon } from 'assets/icons/check_circle.svg';
 import { ReactComponent as EmptyCircleIcon } from 'assets/icons/empty_circle.svg';
-import { ReactComponent as EmptyStarIcon } from 'assets/icons/empty_star.svg';
-import { ReactComponent as FullStarIcon } from 'assets/icons/full_star.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { deleteTodosAsync, putTodosAsync } from 'redux/actions/todosAction';
 import { setSelected } from 'redux/actions/selectedAction';
 import { message } from 'antd';
-
-const Aside = styled.aside`
-  min-width: 300px;
-  border-left: 1px solid ${COLOR_PALETTE.GRAY100};
-  background: ${COLOR_PALETTE.GRAY50};
-`;
-
-const DetailDiv = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 15px;
-  padding: 15px;
-  border: 1px solid ${COLOR_PALETTE.GRAY100};
-  background: #fff;
-
-  &:hover {
-    background: ${COLOR_PALETTE.BG_OFF_WHITE};
-  }
-`;
-
-const DetailTextArea = styled.textarea`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: #fff;
-  font-size: 0.95rem;
-  padding: 15px;
-  resize: none;
-  overflow: hidden;
-
-  &:hover {
-    background: ${COLOR_PALETTE.BG_OFF_WHITE};
-  }
-  &:focus {
-    outline: none;
-    background: ${COLOR_PALETTE.BG_OFF_WHITE};
-  }
-`;
-
-const Deadline = styled.div`
-  margin-left: 15px;
-`;
-
-const Delete = styled.div`
-  margin-left: 15px;
-`;
+import { Aside, DetailDiv, DetailTextArea, Delete } from 'styles/detailStyle';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -71,12 +20,16 @@ const Detail = () => {
   }, [id]);
 
   const putData = (todoid: number, index: number) => {
-    const todo = { ...todos[index] };
+    if (detailValue.trim() !== '') {
+      const todo = { ...todos[index] };
 
-    todo.description = detailValue;
+      todo.description = detailValue;
 
-    dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
-    message.success('세부 내용이 수정되었습니다.');
+      dispatch(putTodosAsync.request({ todoid: todoid, todo: todo, index: index }));
+      message.success('세부 내용이 수정되었습니다.');
+    } else {
+      message.error('세부 내용을 입력해주세요.');
+    }
   };
 
   const deleteData = (todoid: number) => {

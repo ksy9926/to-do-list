@@ -39,7 +39,9 @@ const Header = () => {
           ref={inputRef}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          onChange={(e) => debounce(() => dispatch(setSearchValue(e.target.value)), 300)}
+          onChange={(e) =>
+            debounce(() => dispatch(setSearchValue(e.target.value.toLowerCase())), 300)
+          }
         />
         {(isFocused || value) && (
           <ClearIcon
