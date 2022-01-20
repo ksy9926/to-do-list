@@ -43,16 +43,20 @@
 
 ### ⭐️ 웹서비스 소개
 
-|           메인페이지 To Do 등록            |
-| :----------------------------------------: |
-| <img src='./images/todo.gif' alt='todo' /> |
+|               메인페이지 To Do 등록               |
+| :-----------------------------------------------: |
+| <img src='./images/create_todo.gif' alt='todo' /> |
+
+|           메인페이지 To Do 진행중/완료            |
+| :-----------------------------------------------: |
+| <img src='./images/create_todo.gif' alt='todo' /> |
 
 <div id='5'></div>
 <br />
 
 ### 🗓 개발 기간
 
-- 2022.01.03(월) ~ 2022.01.21(금)
+`2022.01.03(월) ~ 2022.01.21(금)`
 
 <div id='6'></div>
 <br />
@@ -62,23 +66,37 @@
 - 로컬에 mongodb가 실행되고 있어야 원활하게 서비스 이용이 가능합니다.
 
 1. 저장소 복제
-2. cd frontend
-3. yarn install
-4. yarn start
-5. 새로운 터미널
-6. cd backend
-7. yarn install
-8. nodemon src
+2. frontend 이동 후 설치
+
+```bash
+$ cd frontend
+$ yarn install
+$ yarn start
+```
+
+3. 새로운 터미널 열기
+4. backend 이동 후 설치
+
+```bash
+$ cd backend
+$ yarn install
+$ nodemon src
+```
 
 <div id='7'></div>
 <br />
 
 ### 📌 참고 사이트 및 기타 정보
 
+1. 참고 사이트
+
 - [Microsoft To Do UI](https://to-do.live.com/tasks/today)
 - [몽고db연결](https://poiemaweb.com/mongoose)
 - [Swagger 연동](https://any-ting.tistory.com/105)
 - [파일시스템 사용](https://smilehugo.tistory.com/entry/nodejs-json-create-store-read-update)
+
+2. 기타정보
+
 - Git Convention
   - Feat: 새로운 기능을 추가할 경우
   - Fix: 버그를 고친 경우
