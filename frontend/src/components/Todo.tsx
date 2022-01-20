@@ -19,6 +19,7 @@ import { getTodosAsync, postTodosAsync } from 'redux/actions/todosAction';
 import { TodoList } from './TodoList';
 import { toggleMenu } from 'redux/actions/menuAction';
 import { message } from 'antd';
+import { getFormatDate } from 'utils/date';
 
 const Todo = ({ menu }: { menu: string }) => {
   const dispatch = useDispatch();
@@ -65,23 +66,12 @@ const Todo = ({ menu }: { menu: string }) => {
               value={todoValue}
               onChange={(e) => setTodoValue(e.target.value)}
             />
-            <AddText
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                marginTop: '10px',
-                fontSize: '0.8rem',
-              }}
-            >
-              <CalendarIcon />
+            <AddText>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <CalendarIcon style={{ marginRight: '10px' }} /> {getFormatDate().slice(0, 10)}
+              </div>
               <div>
-                <span
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    setIsAdd(!isAdd);
-                  }}
-                >
+                <span style={{ cursor: 'pointer' }} onClick={() => setIsAdd(!isAdd)}>
                   취소
                 </span>
                 <span

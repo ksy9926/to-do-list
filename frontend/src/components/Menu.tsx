@@ -32,12 +32,22 @@ const Menu = ({ menu }: { menu: string }) => {
         />
       </HamburgerDiv>
       <Nav>
-        <NavItemDiv menu={menu === 'today'} onClick={() => navigate('/')}>
+        <NavItemDiv
+          menu={menu === 'today'}
+          onClick={() => {
+            navigate('/');
+          }}
+        >
           <LightIcon />
           <NavTitleSpan>오늘 할 일</NavTitleSpan>
           <NavCountSpan>{todos.filter((item) => !item.completed).length}</NavCountSpan>
         </NavItemDiv>
-        <NavItemDiv menu={menu === 'important'} onClick={() => navigate('/important')}>
+        <NavItemDiv
+          menu={menu === 'important'}
+          onClick={() => {
+            navigate('/important');
+          }}
+        >
           <EmptyStarIcon />
           <NavTitleSpan>중요</NavTitleSpan>
           <NavCountSpan>

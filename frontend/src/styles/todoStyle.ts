@@ -78,15 +78,15 @@ export const TodoInfo = styled.div`
 `;
 
 export const TodoContent = styled.div`
-  padding: '2px 0';
-  white-space: 'nowrap';
-  overflow: 'hidden';
-  text-overflow: 'ellipsis';
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const AddText = styled.div`
-  text-align: right;
-  width: '100%';
-  margin-top: '10px';
-  font-size: '0.8rem';
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 0.8rem;
 `               

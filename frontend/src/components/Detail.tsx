@@ -77,6 +77,7 @@ const Detail = () => {
           onBlur={() => {
             putData(todos[id].todoid, id);
           }}
+          maxLength={120}
         />
       </DetailDiv>
       <DetailDiv
