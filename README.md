@@ -1,6 +1,6 @@
 # Tripbtoz Todo Project
 
-트립비토즈 과제 - Todo 서비스 프로젝트
+Todo 서비스 프로젝트
 
 ## 🗂 목차
 
@@ -10,15 +10,14 @@
 - [**웹서비스 소개**](#4)
 - [**개발 기간**](#5)
 - [**실행 방법**](#6)
-- [**참고 사이트 및 기타 정보**](#7)
+- [**참고 사이트**](#7)
 
 <div id='1'></div>
 <br />
 
 ### 💁‍♂️ 프로젝트 소개
 
-- 트립비토즈 프론트엔드 과제 : To Do 서비스 프로젝트
-- UI 및 구성은 Microsoft To Do를 참조하여 제작하였습니다.
+- Microsoft To Do 클론 코딩
 
 <div id='2'></div>
 <br />
@@ -103,25 +102,9 @@ $ nodemon src
 <div id='7'></div>
 <br />
 
-### 📌 참고 사이트 및 기타 정보
-
-1. 참고 사이트
+### 📌 참고 사이트
 
 - [Microsoft To Do UI](https://to-do.live.com/tasks/today)
 - [몽고db연결](https://poiemaweb.com/mongoose)
 - [Swagger 연동](https://any-ting.tistory.com/105)
 - [파일시스템 사용](https://smilehugo.tistory.com/entry/nodejs-json-create-store-read-update)
-
-2. 기타정보
-
-- Git Convention
-  - Feat: 새로운 기능을 추가할 경우
-  - Fix: 버그를 고친 경우
-  - Design: CSS 등 사용자 UI 디자인 변경
-  - Style: 코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우
-  - Comment: 필요한 주석 추가 및 변경
-  - Docs: 문서를 수정한 경우
-  - Test: 테스트 추가, 테스트 리팩토링(프로덕션 코드 변경 X)
-  - Chore: 빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우(프로덕션 코드 변경 X)
-  - Rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
-  - Remove: 파일을 삭제하는 작업만 수행한 경우

@@ -1,6 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
 import { ReactComponent as SearchIcon } from 'assets/icons/search.svg';
-import { ReactComponent as TripbtozIcon } from 'assets/icons/logo.svg';
 import { ReactComponent as ProfileIcon } from 'assets/icons/profile.svg';
 import { ReactComponent as ClearIcon } from 'assets/icons/clear.svg';
 import {
@@ -28,10 +27,7 @@ const Header = () => {
 
   return (
     <HeaderWrap>
-      <LogoDiv>
-        <TripbtozIcon style={{ marginRight: '10px' }} />
-        To Do
-      </LogoDiv>
+      <LogoDiv>To Do</LogoDiv>
       <InputDiv>
         <SearchIcon style={searchIconStyle} onClick={onFocusHandler} />
         <Input
