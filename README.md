@@ -1,4 +1,4 @@
-# Tripbtoz Todo Project
+# Todo Project
 
 Todo 서비스 프로젝트
 
